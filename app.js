@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import AnimalsController from './controllers/AnimalsController.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
