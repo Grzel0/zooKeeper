@@ -37,3 +37,35 @@ const getAnimalsBySpecies = (species) => {
     return animals.filter(animal => animal.species.toLowerCase() === species.toLowerCase());
 };
 
+const addAnimal = (newAnimal) => {
+    const animals = readData();
+    const id = animals.length ? animals[animals.length - 1].id + 1 : 1;
+    const animal = { id, ...newAnimal };
+    animals.push(animal);
+    writeData(animals);
+    return animal;
+};
+
+const updateAnimal = (id, updatedData) => {
+    const animals = readData();
+    const index = animals.findIndex(animal => animal.id === id);
+    if (index !== -1) {
+        animals[index] = { ...animals[index], ...updatedData };
+        writeData(animals);
+        return animals[index];
+    }
+    return null;
+};
+
+const deleteAnimal = (id) => {
+    const animals = readData();
+    const index = animals.findIndex(animal => animal.id === id);
+    if (index !== -1) {
+        animals.splice(index, 1);
+        writeData(animals);
+        return true;
+    }
+    return false;
+};
+
+export { getAllAnimals, getEndangeredAnimals, getAnimalById, getAnimalsByHabitat, getAnimalsBySpecies, addAnimal, updateAnimal, deleteAnimal };
